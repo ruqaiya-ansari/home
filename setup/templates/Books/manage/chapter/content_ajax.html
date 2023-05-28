@@ -1,0 +1,32 @@
+
+
+
+ {% for content in cont %}
+
+        <div data-id="{{ content.id }}" class="page">
+
+            {% with page=content.page %}
+                        {% if request.user.is_staff %}
+
+             <div class="updates">
+
+            <form action="{% url 'setup:chapter_content_delete' content.id %}" method="post">
+                <input type="submit" value="Delete">
+                {% csrf_token %}
+            </form>
+                 <a href="{% url 'setup:chapter_content_update' chapter.id chapter.book.page_type page.id %}">Edit</a>
+
+                </div>
+            {% endif %}
+
+
+            <span>
+                 <span class="order">{{ content.order|add:1 }}</span>
+              </span>
+            {{ page.render }}
+
+
+            {% endwith %}
+        </div>
+
+        {% endfor %}

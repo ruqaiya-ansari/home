@@ -1,0 +1,15 @@
+ {% for book in results %}
+    <div class="course-info">
+        <img src="{{ book.image.url }}">
+        <div>
+            <p><a href="{% url 'setup:book_edit'  book.id %}">Edit</a></p>
+             <p><a href="{% url 'setup:book_delete'  book.id %}">Delete</a></p>
+            <p><a href="{% url 'setup:edit_chapters'  book.id %}">Edit chapters</a></p>
+             {% if book.chapter.count > 0 %}
+
+            <p><a href="{% url 'setup:chapter_content_list'  book.chapter.first.id %}">Manage Content </a></p>
+            {% endif %}
+
+        </div>
+    </div>
+ {% endfor %}

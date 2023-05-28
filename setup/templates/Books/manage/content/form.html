@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if object %}
+Edit content "{{ object.title }}"
+{% else %}
+Add a new content
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="body">
+<div class="module_form">
+    <h2>Book info</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Save Content"></p>
+    </form>
+</div>
+</div>
+{% endblock %}
+{% block domready %}
+$('.module_form form p label').remove();
+
+$('.module_form p input:first-child').attr('placeholder', 'Page no.');
+$('.module_form p textarea').attr('placeholder', 'Enter text here..');
+{% endblock %}

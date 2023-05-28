@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{% if object %}
+Edit Book
+{% else %}
+Add Book
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if object %}
+Edit Book
+{% else %}
+Add Book
+{% endif %}
+<div class="body">
+<div class="module_form">
+    <h2>Book Info</h2>
+    <form action="." method="post" enctype="multipart/form-data">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <P><input type="submit" value="Save Book"></P>
+    </form>
+</div>
+
+</div>
+{% endblock %}
+{% block domready %}
+$('.module_form form p label').remove();
+$('.module_form form p select').append("<option disabled selected hidden>Select category</option>");
+$('#id_title').attr('placeholder', 'title');
+$('#id_slug').attr('placeholder', 'slug');
+$('#id_author').attr('placeholder', 'author');
+$('#id_page_type').attr('placeholder', 'Page type');$('#id_description').attr('placeholder', 'Enter description here..');
+{% endblock %}

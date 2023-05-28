@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load Book %}
+{% load thumbnail %}
+{% block title %}
+{{ chapter.title }}
+{% endblock %}
+{% block content %}
+
+    {% with book=chapter.book %}
+    <div class="chapter">
+
+        <div class="chapter_list">
+
+
+    <ul class="chapters" id="chapter_list">
+<span class="close">&times</span>
+            <h3>{{ book.title }}</h3>
+        {% for c in book.chapter.all %}
+        <li data-id = "{{ c.id }} " {% if c.id == chapter %} class="selected"{% endif %}>
+            <a href="{% url 'setup:chapter_content_list' c.id %}">
+                <span>{{ forloop.counter }} </span>   {{ c.title }}
+
+            </a>
+        </li>
+
+        {% endfor %}
+    </ul>
+     </div>
+
+</div>
+
+<div class="bar" id="bar">{{ chapter.title }}</div>
+
+    {% thumbnail book.image "200" as im %}
+    <img src="{{ im.url }}" class="aside">
+    {% endthumbnail %}
+
+
+<div class="reads">
+
+    <h2>{{ book.title }}</h2>
+    <h3>{{ chapter.title }}</h3>
+
+    <div class="chapter-contents" id="read-list">
+        {% include 'Books/manage/chapter/content_ajax.html' %}
+
+    </div>
+
+</div>
+
+{% if request.user.is_staff %}
+   <div class="add_book">
+        <a href="{% url 'setup:chapter_content_create' chapter.id  %}" >+</a>
+    </div>
+{% endif %}
+
+{% endwith %}
+{% endblock %}
+
+{% block domready %}
+
+var page = 1;
+  var empty_page = false;
+  var block_request = false;
+
+  $(window).scroll(function() {
+    var margin = $(document).height() - $(window).height() - 200;
+    if  ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+     block_request = true;
+      page += 1;
+      $.get('?page=' + page, function(data) {
+       if(data == '') {
+          empty_page = true;
+        }
+        else {
+          block_request = false;
+          $('#read-list').append(data);
+        }
+      });
+    }
+  });
+
+
+{% endblock %}
+{% block superuser %}
+ $('#chapter_list').sortable({
+      stop: function(event, ui) {
+          modules_order = {};
+          $('#chapter_list').children().each(function(){
+              // update the order field
+
+              // associate the module's id with its order
+              modules_order[$(this).data('id')] = $(this).index();
+          });
+          $.ajax({
+              type: 'POST',
+              url: '{% url "setup:chapter_order" %}',
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'json',
+                 data: JSON.stringify(modules_order)
+             });
+      }
+  });
+
+  $('#read-list').sortable({
+      stop: function(event, ui) {
+          contents_order = {};
+          $('#read-list').children().each(function(){
+              // associate the module's id with its order
+ $(this).find('.order').text($(this).index() + 1);
+              contents_order[$(this).data('id')] = $(this).index();
+          });
+
+          $.ajax({
+              type: 'POST',
+              url: '{% url "setup:page_order" %}',
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'json',
+              data: JSON.stringify(contents_order),
+          });
+      }
+  });
+{% endblock %}

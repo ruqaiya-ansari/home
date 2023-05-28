@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}My Books{% endblock %}
+
+{% block content %}
+
+<input type="search" id="list">
+<div class="mainmodule">
+    {% include 'Books/manage/Book/ajax_search.html' %}
+</div>
+
+<div class="module">
+
+    {% for book in object_list %}
+    <div class="course-info">
+        <img src="{{ book.image.url }}">
+        <div>
+            <p><a href="{% url 'setup:book_edit'  book.id %}">Edit</a></p>
+             <p><a href="{% url 'setup:book_delete'  book.id %}">Delete</a></p>
+            <p><a href="{% url 'setup:edit_chapters'  book.id %}">Edit chapters</a></p>
+             {% if book.chapter.count > 0 %}
+
+            <p><a href="{% url 'setup:chapter_content_list'  book.chapter.first.id %}">Manage Content </a></p>
+            {% endif %}
+
+        </div>
+    </div>
+    {% empty %}
+    <p>You havent added any book yet</p>
+    {% endfor %}
+
+</div>
+ <div class="add_book">
+        <a href="{% url 'setup:book_create' %}" >+</a>
+    </div>
+
+{% endblock %}
+
+
+{% block domready %}
+$('input[type="search"]').on('keyup', function(){
+if(this.value.length>2){
+
+
+$.ajax({
+type: "GET",
+url: "{% url 'setup:searches' %}",
+data: {search_text: $(this).val()},
+success:function(data){
+$('.mainmodule').html(data['html_from_view']);
+
+}
+});
+
+}
+
+});
+{% endblock %}

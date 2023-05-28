@@ -1,0 +1,24 @@
+
+<div id="share-options">
+        <h3>Great to have you back</h3>
+    <hr/>
+
+    <form  action="{% url 'accounts:login' %}" method="post" id="login">
+
+        {{ login.as_p }}
+            {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}"/>
+        <input type="submit" value="login">
+        <p>Dont have an account ? <span id="reg">Register Now</span></p>
+    </form>
+
+     <form  action="{% url 'accounts:signup' %}" method="post" id="register">
+
+        {{ register.as_p }}
+            {% csrf_token %}
+        <input type="submit" value="Register">
+         <p> Already a member? <span id="log">Log In</span></p>
+    </form>
+
+
+</div>
