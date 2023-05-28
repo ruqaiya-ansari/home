@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}{{ books.name }}{% endblock %}
+{% block content %}
+<h4 id="heads">Books in {{ books.name }}</h4>
+<div class="my_grid">
+
+    {% for book in books.books.all %}
+    {% thumbnail book.image "140" as im %}
+
+         <a href="{{ book.get_absolute_url }}"><img src="{{ im.url }}" class="items"></a>
+    {% endthumbnail %}
+
+                {% endfor %}
+    </div>
+
+{% endblock %}

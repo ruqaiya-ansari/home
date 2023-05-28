@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Edit your account{% endblock %}
+{% block content %}
+<div class="body">
+
+    <div class="divide" >
+        {% if user.profile.photo %}
+        <div class="pic-sec">
+            <img src="{{ user.profile.photo.url }}">
+        </div>
+        {% endif %}
+    <div class="module_form" id="form-sec">
+<h3>Edit your account</h3>
+
+<form action="" method="post" enctype="multipart/form-data" id="ed">
+    {{ user_form }}
+    {{ profile_form.as_p }}
+
+
+
+
+    {% csrf_token %}
+
+    <input type="submit" value="save changes">
+</form>
+
+        </div>
+    </div>
+    </div>
+{% endblock %}

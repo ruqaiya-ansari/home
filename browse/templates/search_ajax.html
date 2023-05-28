@@ -1,0 +1,23 @@
+
+
+
+
+
+{% for result in results %}
+
+{% load thumbnail %}
+
+
+    {% thumbnail result.image "255" as im %}
+        <a href="{{ result.get_absolute_url }}"> <img src="{{ im.url }}"></a>
+    {% endthumbnail %}
+
+
+
+
+
+
+
+
+
+{% endfor %}

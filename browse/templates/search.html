@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+ {% load thumbnail %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<body class="decor">
+
+<b><p>
+    Explore ClasicReaders.<br/>
+    What are you looking for?</p></b>
+
+<div>
+    
+<input type="search" placeholder="Search...." id="sea" class="page-bar">
+    </div>
+<div id="result" class="searching">
+    {% include 'search_ajax.html' %}
+</div>
+
+
+
+</body>
+{% endblock %}
+{% block domready %}
+$("#coveringss").remove();
+{% endblock %}

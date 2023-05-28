@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block content %}
+<div class="body">
+    <div class="module_form" id="forming">
+        <div class="spacings">
+<h2>Edit your review on <br/>"{{ object.book.title }}"</h2>
+            </div>
+<form action="" method="post" id="revi">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Save Changes">
+</form>
+    </div>
+</div>
+{% endblock %}

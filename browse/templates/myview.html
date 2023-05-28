@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load thumbnail%}
+{% load static %}
+{% block title %}ClasicReaders{% endblock %}
+{% block content %}
+
+{% if reading %}
+
+<h4 id="contin">Continue Reading</h4>
+
+<div class="browse-books" id="cont">
+{% for list in reading|slice:5 %}
+
+{% with book=list.book %}
+ {% thumbnail book.image "140" as im %}
+
+        <div class="viewss"> <a href="{% url 'setup:chapter_content_list' list.id %}"><img src="{{ im.url }}"></a>
+        <div class="bt"><a href="{% url 'library:read_remove' book.id %}" >Delete</a></div>
+
+         </div>
+
+    {% endthumbnail %}
+
+{% endwith %}
+{% endfor %}
+    </div>
+{% endif %}
+<div class="viewpo">
+<h4>Browse</h4>
+<section class="flee">
+
+    <div class="box">
+<img  src="{% static 'images/novel.jpg' %}"/>
+        <div class="trans"><a href="{% url 'browse:listing'  %}">Novel</a></div>
+
+</div>
+<div class="box">
+<img src="{%  static 'images/story.jpg' %}" />
+    <div class="trans"><a href="{% url 'browse:story' %}">Short Story</a></div>
+</div>
+    </section>
+</div>
+
+<div class="wrapping">
+<h4>New Arrivals
+    </h4>
+
+<div class="wrapper swiper swiper2 " id="part">
+  <div class="section__fifth-cards swiper-wrapper">
+      {% for book in arrival %}
+    <div  class="swiper-slide">
+
+
+                <a href="{{ book.get_absolute_url }}">{% thumbnail book.image  "160" as im   %}
+                    <img src="{{ im.url }}" >
+                {% endthumbnail %}
+                </a>
+
+
+    </div>
+      {% endfor %}
+  </div>
+
+
+</div>
+</div>
+<div class="wrapping">
+<h4>This Festive season</h4>
+
+<div class="wrapper swiper swiper2 show" id="parts">
+  <div class="section__fifth-cards swiper-wrapper">
+      {% for book in featured %}
+    <div  class="swiper-slide">
+
+
+                <a href="{{ book.get_absolute_url }}">{% thumbnail book.image  "160" as im   %}
+                    <img src="{{ im.url }}" >
+                {% endthumbnail %}
+                </a>
+
+
+    </div>
+      {% endfor %}
+  </div>
+
+
+
+</div>
+</div>
+<div class="wrapping">
+<h4>All time Popular</h4>
+
+<div class="wrapper swiper swiper3" id="part3">
+  <div class="section__fifth-cards swiper-wrapper">
+      {% for book in popular %}
+    <div  class="swiper-slide">
+
+
+                <a href="{{ book.get_absolute_url }}">{% thumbnail book.image  "180" as im   %}
+                <img src="{{ im.url }}" >
+                {% endthumbnail %}
+                </a>
+
+
+    </div>
+      {% endfor %}
+  </div>
+
+
+
+</div>
+</div>
+
+<div class="wrapping">
+<h4>Our Recommendation</h4>
+
+<div class="wrapper swiper swiper2 show" id="same">
+  <div class="section__fifth-cards swiper-wrapper">
+      {% for book in suggest %}
+    <div  class="swiper-slide">
+
+
+                <a href="{{ book.get_absolute_url }}">{% thumbnail book.image  "160" as im   %}
+                    <img src="{{ im.url }}" >
+                {% endthumbnail %}
+                </a>
+
+
+    </div>
+      {% endfor %}
+  </div>
+
+
+
+</div>
+</div>
+
+<div class="wrapping">
+<h4>Read some short stories</h4>
+
+<div class="wrapper swiper swiper2 show" id="parts">
+  <div class="section__fifth-cards swiper-wrapper">
+      {% for book in story %}
+    <div  class="swiper-slide">
+
+
+                <a href="{{ book.get_absolute_url }}">{% thumbnail book.image  "160" as im   %}
+                    <img src="{{ im.url }}" >
+                {% endthumbnail %}
+                </a>
+
+
+    </div>
+      {% endfor %}
+  </div>
+
+
+
+</div>
+</div>
+{% endblock %}
+{% block domready %}
+
+
+
+
+
+
+{% endblock %}

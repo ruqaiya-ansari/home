@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}Explore{% endblock %}
+{% block content %}
+<div class="contAlign">
+    {% for cate in category %}
+    <div class="box">
+       <img class="picture" src="{{ cate.image.url }}" id="boxes">
+
+    <div class="trans">
+        <a href="{% url  'browse:genre' cate.slug %}">{{cate}}</a>
+</div>
+        </div>
+    {% endfor %}
+</div>
+
+
+<h4 class="hea">Must Read in mystery</h4>
+<div class="browse-books ">
+
+    {% for book in mystery_books %}
+    {% thumbnail book.image "140" as im %}
+
+         <a href="{{ book.get_absolute_url }}"><img src="{{ im.url }}" class="items"></a>
+    {% endthumbnail %}
+
+                {% endfor %}
+    </div>
+
+
+
+
+
+
+
+<h4 class="hea">Must read in Action</h4>
+
+<div class="browse-action" id="act">
+
+
+    {% for book in action_books %}
+
+
+    <div id="book-card">
+
+             {% thumbnail book.image "100" as im %}
+       <div><a href="{{ book.get_absolute_url }}"><img src="{{ im.url }}" class="items"></a></div>
+    {% endthumbnail %}
+<div id="space">
+        <h3>{{ book.title }}</h3>
+        <p>{{ book.description|truncatewords:20 }}</p>
+</div>
+  </div>
+ {% endfor %}
+  </div>
+
+
+
+<h4 class="hea"> Must read in romance</h4>
+<div class="browse-books">
+
+    {% for book in romance %}
+    {% thumbnail book.image "140" as im %}
+
+         <a href="{{ book.get_absolute_url }}"><img src="{{ im.url }}" class="items"></a>
+    {% endthumbnail %}
+
+                {% endfor %}
+    </div>
+
+
+{% endblock %}

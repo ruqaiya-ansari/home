@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}My Library{% endblock %}
+{% block content %}
+{% if object_list %}<h4> My Collection</h4>
+{% else %}
+
+    <p id="no-lib">Add books<br/>to your library</p>
+{% endif %}
+<div class="libelement" >
+
+{% for book in object_list %}
+<div class="myitems">
+
+
+
+        {% thumbnail book.image "150" as im %}
+
+    <a href="{% url 'setup:chapter_content_list' book.chapter.first.id %}" ><img src="{{ im.url }}"></a>
+
+
+    {% endthumbnail %}
+
+    <div class="bt">
+
+        <a href="#" data-id="{{ book.id }}" class="dele" >Delete </a>
+    </div>
+
+
+</div>
+
+{% endfor %}
+    </div>
+
+{% endblock %}

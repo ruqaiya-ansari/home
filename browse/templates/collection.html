@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title%}Browse{% endblock %}
+{% block content %}
+   <h4 class="hea" style="margin-top: 120px;">Novels</h4>
+
+<div class="mynovel" id="start">
+
+    {% for book in object_list %}
+  {% thumbnail book.image "140" as im %}
+
+      <a href="{{ book.get_absolute_url }}"><img src="{{ im.url }}" class="items"></a>
+    {% endthumbnail %}
+
+
+                {% endfor %}
+    </div>
+
+{% endblock %}

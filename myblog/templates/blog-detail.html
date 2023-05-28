@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}{{ objecttitle }}{% endblock %}
+
+{% block content %}
+<div class="parent">
+<article id="text" >
+
+    {{ object.body|safe| linebreaks }}
+</article>
+    </div>
+{% endblock %}

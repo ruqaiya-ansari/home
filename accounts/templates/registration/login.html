@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %}Login{% endblock %}
+{% block content %}
+<div class="body">
+
+    <div class="module_form">
+ <div class="spacings">
+            <h2>Great to have You back</h2>
+
+        </div>
+            <form action="" method="post">
+              {{ form.as_p }}
+              {% csrf_token %}
+                <p id="forget"><a href="{% url 'accounts:password_reset' %}">Forgot your Password</a></p>
+              <input type="hidden"   name="next" value="{{ next }}">
+              <input type="submit" value="Sign In">
+
+            </form>
+
+          <p id="links">Don't have an account?<a href="{%url  'accounts:signup' %}">Sign up</a></p>
+
+    </div>
+</div>
+{% endblock %}

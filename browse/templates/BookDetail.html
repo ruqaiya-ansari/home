@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block content %}
+
+<div class="color">
+    <img src="{%  static 'images/back.jpg' %}" id="flower">
+    <blockquote>{{ object.book_quotes.first.quotes }}</blockquote>
+    <div class="photo">
+       {% thumbnail object.image "200" as im %}
+        <img src="{{ im.url }}">
+            {% endthumbnail %}
+        </div>
+</div>
+
+<div class="phone-top">
+
+    <b><h2>{{ object.title }}</h2></b>
+    {% thumbnail object.image "200" as im %}
+        <img src="{{ im.url }}">
+            {% endthumbnail %}
+</div>
+<div class="area">
+    <div class="top">
+
+<b><h2 id="spli">{{ object.title }}</h2></b>
+<h5 id="indent">- by {{ object.author}}</h5>
+
+    </div>
+
+        <div class="description">
+
+
+        <p>{{ object.description|linebreaks }}</p>
+             {% for tag in object.tags.all %}
+            <span class="tags">#{{ tag.name }}</span>
+            {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+
+        </div>
+    <div class="click">
+
+     {% with   user_likes=object.user_likes.all   %}
+            {%for chapter in object.chapter.all  %}
+            {% if forloop.first %}
+           <a href="{% url 'setup:chapter_content_list' chapter.id  %}">start reading</a>
+            {% endif %}
+            {% endfor %}
+
+             <a href="#" data-id="{{ object.id }}" data-action="{% if request.user in user_likes %}un{% endif %}like" class="like button">
+          {% if request.user not in user_likes %}
+            Like
+          {% else %}
+            Unlike
+                 {% endif %}</a>
+
+
+
+            {% endwith %}
+             <a href="{% url 'library:book_add' object.pk %}">Add to Library</a>
+        <table>
+
+{% if book_rating %}
+ <tr>
+
+                <td>Rating</td>
+                <td> {{ book_rating|floatformat:1 }}/5 </td>
+            </tr>
+{% endif %}
+            <tr>
+
+                <td>Total likes</td>
+                <td id="counting">{{ object.total_likes }}</td>
+            </tr>
+
+
+        </table>
+
+<table>
+
+
+
+
+            <tr>
+                <tr>
+                <td>Author</td>
+                <td>{{ object.author }}</td>
+            </tr>
+                <td>Genre</td>
+                <td>{{ object.genre }}</td>
+            </tr>
+            <tr>
+                <td>Category</td>
+
+                <td> {{ object.category.all|join:"," }}</td>
+
+
+            <tr>
+                <td>Total chapters</td>
+                <td>{{ object.chapter.count }}</td>
+            </tr>
+
+
+
+        </table>
+
+
+</div>
+</div>
+
+
+
+
+{% if object.book_quotes.all %}
+
+
+
+<div class="wrapper swiper swiper4" id="seven">
+  <div class="section__fifth-cards swiper-wrapper">
+
+            {% for book in object.book_quotes.all %}
+
+
+          <figure class="swiper-slide" id="covering">
+
+              <blockquote><p>{{ book.quotes}}</p></blockquote>
+
+
+         </figure>
+            {% endfor %}
+
+    </div>
+      </div>
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+<section class="carousel">
+    <h4> You may also Like</h4>
+
+<div class="section__thumb__tile swiper swiper1">
+  <!-- Additional required wrapper -->
+
+  <div class="swiper-wrapper" >
+    <!-- Slides -->
+      {% for book in related_books %}
+    <div  class="swiper-slide">
+
+
+                <a href="{{ book.get_absolute_url }}">{% thumbnail book.image  "160" as im   %}
+                    <img src="{{ im.url }}" >
+                {% endthumbnail %}
+                </a>
+
+
+    </div>
+      {% endfor %}
+
+    ...
+  </div>
+
+
+
+</div>
+
+</section>
+<div class="browse">
+    {% for book in books %}
+    <p>{{ book.title }}</p>
+    {% endfor %}
+</div>
+
+<div class="review">
+    <h4 >Rating and Reviews</h4>
+
+    <p id="q">What do you think about {{ object.title }} ?</p>
+
+    <form action="" method="post">
+        {{ review_form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="SAVE">
+    </form>
+
+</div>
+<div class="review_section">
+
+
+
+{% for comment in object.review.all %}
+    <div class="user_review">
+{% if comment.user.profile.photo %}
+    {% thumbnail comment.user.profile.photo "70" as im %}
+<img src="{{ im.url }}">
+    {% endthumbnail %}
+{% else %}
+ <img src="{% static 'images\dp.png' %}">
+
+{% endif %}
+
+        <div class="section">
+
+            <p><b>{{ comment.user.first_name }}</b></p>
+
+            {% if  comment.user == request.user  %}
+            <a href="{% url 'browse:review_edit' comment.id %}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon"> <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><path d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"/></svg>
+
+</a>
+
+<a href="{% url 'broese:review_delete' comment.id  %}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon"><!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"/></svg></a>
+{% endif %}
+
+            <p> <b>{{ comment.rating}}/5</b><br/><br/>
+
+    {{ comment.body }}</p>
+
+
+            </div>
+</div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+{% block domready %}
+
+
+
+
+
+ if (window.matchMedia('(min-width: 900px)')) {
+var html = $('#spli').html();
+html = html.replace(/((\w+\W+){4})/, '$1<br/>');
+
+$('#spli').html(html);
+}
+
+  $('a.like').click(function(e){
+ e.preventDefault();
+
+$.ajax({
+type: "POST",
+url: "{% url 'browse:likes' %}",
+data:{
+        id: $(this).data('id'),
+        action: $(this).data('action'),
+      },
+success:function(data){
+if(data['status']=='ok'){
+
+var previous_action = $('a.like').data('action');
+$('a.like').data('action', previous_action == 'like' ? 'unlike' : 'like');
+          // toggle link text
+          $('a.like').text(previous_action == 'like' ? 'Unlike' : 'Like');
+ var previous_likes = parseInt($('#counting').text());
+          $('#counting').text(previous_action == 'like' ? previous_likes + 1 : previous_likes - 1);
+
+}
+
+}
+});
+  });
+
+
+{% endblock %}
