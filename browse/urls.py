@@ -10,7 +10,7 @@ urlpatterns = [
     path('search/pages/<str:text>', views.search_view, name="searches"),
     path('browse/<slug:category_slug>', views.BrowseCategory.as_view(), name='genre'),
     path('Edit/<pk>', views.ReviewEdit.as_view(), name="review_edit"),
-    path('homes', views.HomeV.as_view(), name="homes"),
+    path('', views.HomeV.as_view(), name="homes"),
 
     path('Delete/<pk>', views.ReviewDelete.as_view(), name="review_delete"),
     path('novel/pages/', views.Listing.as_view(), name='listing'),
