@@ -22,22 +22,25 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-DEFAULT_FILE_STORAGE = 'core.azure_storage.AzureMediaStorage'
-STATICFILES_STORAGE = 'core.azure_storage.AzureStaticStorage'
+DEFAULT_FILE_STORAGE = 'myclassic.azure_storage.AzureMediaStorage'
+STATICFILES_STORAGE = 'myclassic.azure_storage.AzureStaticStorage'
 
 AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME')
 AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_IMAGE_BACKEND = 'pillow'
-
 
 STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+
+
 # Configure Postgres database based on connection string of the libpq Keyword/Value form
 # https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING
 conn_str = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
