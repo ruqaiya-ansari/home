@@ -3,7 +3,7 @@
 {% block title %}ClasicReaders{% endblock %}
 
 {% block content%}
-<h3> Latest Articles</h3>
+<h3 id="cen"> Latest Articles</h3>
 <div class="libelement">
 {% for article in object_list %}
 <div class="myitems">
@@ -14,9 +14,11 @@
 <h3><a href="{% url 'blog:article-detail' article.slug %}">{{ article.title }}</a></h3>
 
     {% endthumbnail %}
-</div>
 {% empty %}
-    <h3>Coming Soon</h3>
+<h3>Coming Soon</h3>
+</div>
+
+
 {% endfor %}
     </div>
 {% endblock %}

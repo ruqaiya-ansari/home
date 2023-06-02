@@ -19,7 +19,9 @@
     margin-top: 20vh;
 
 }
-
+#cen{
+    text-align: center;
+}
 
 html{
 scroll-behaviour:smooth;

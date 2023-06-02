@@ -19,7 +19,7 @@ class BookEditMixin(object):
     model = Books
     fields = ['category', 'title', 'image', 'description', 'slug', 'author', 'page_type']
 
-    success_url = reverse_lazy('update_books')
+    success_url = reverse_lazy('setup:update_books')
     template_name = 'Books/manage/Book/form.html'
 
 
@@ -59,7 +59,7 @@ class ChapterUpdateView(SuperuserRequiredMixin, TemplateResponseMixin, View):
         formset = self.get_formset(data=request.POST)
         if formset.is_valid():
             formset.save()
-            return redirect('update_books')
+            return redirect('setup:update_books')
         return self.render_to_response({'book': self.book, 'formset': formset})
 
 
@@ -74,7 +74,7 @@ class ContentCreateUpdateView(SuperuserRequiredMixin, TemplateResponseMixin, Vie
 
         model_name = self.chapter.book.page_type
 
-        return apps.get_model(app_label='basics', model_name=model_name)
+        return apps.get_model(app_label='setup', model_name=model_name)
 
     def get_form(self, model, *args, **kwargs):
         Form = modelform_factory(model, exclude=[''])
@@ -101,7 +101,7 @@ class ContentCreateUpdateView(SuperuserRequiredMixin, TemplateResponseMixin, Vie
 
             if not id:
                 Content.objects.create(chapter=self.chapter, page=obj)
-            return redirect('chapter_content_list', self.chapter.id)
+            return redirect('setup:chapter_content_list', self.chapter.id)
 
         return self.render_to_response({'form': form, 'object': self.obj})
 
@@ -113,7 +113,7 @@ class ContentDeleteView(SuperuserRequiredMixin, View):
         chapter = content.chapter
         content.page.delete()
         content.delete()
-        return redirect('chapter_content_list', chapter.id)
+        return redirect('setup:chapter_content_list', chapter.id)
 
 
 class ChapterContentListView(TemplateResponseMixin, View):
