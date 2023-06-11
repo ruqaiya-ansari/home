@@ -59,51 +59,49 @@
 
             {% endwith %}
              <a href="{% url 'library:book_add' object.pk %}">Add to Library</a>
-        <table>
+        <div class="table">
 
 {% if book_rating %}
- <tr>
 
-                <td>Rating</td>
-                <td> {{ book_rating|floatformat:1 }}/5 </td>
-            </tr>
+<p>
+               Rating :
+                 {{ book_rating|floatformat:1 }}/5
+</p>
 {% endif %}
-            <tr>
-
-                <td>Total likes</td>
-                <td id="counting">{{ object.total_likes }}</td>
-            </tr>
-
-
-        </table>
-
-<table>
+       <br/>
+<p>
+              Total likes:
+                <span id="counting">{{ object.total_likes }}</span>
+        </p>
 
 
+        </div>
 
-
-            <tr>
-                <tr>
-                <td>Author</td>
-                <td>{{ object.author }}</td>
-            </tr>
-                <td>Genre</td>
-                <td>{{ object.genre }}</td>
-            </tr>
-            <tr>
-                <td>Category</td>
-
-                <td> {{ object.category.all|join:"," }}</td>
-
-
-            <tr>
-                <td>Total chapters</td>
-                <td>{{ object.chapter.count }}</td>
-            </tr>
+<div class="table">
 
 
 
-        </table>
+
+
+              <p> Author:
+                {{ object.author }}
+            <br/>
+               Genre:
+                   {{ object.genre }}
+            <br/>
+
+                Category:
+
+                   {{ object.category.all|join:"," }}
+
+<br/>
+          Total chapters:
+              {{ object.chapter.count }}</p>
+
+
+
+
+        </div>
 
 
 </div>

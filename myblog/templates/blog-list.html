@@ -3,8 +3,10 @@
 {% block title %}ClasicReaders{% endblock %}
 
 {% block content%}
+    {% if object.list  %}
 <h3 id="cen"> Latest Articles</h3>
 <div class="libelement">
+
 {% for article in object_list %}
 <div class="myitems">
  {% thumbnail article.image "150" as im %}
@@ -15,10 +17,13 @@
 
     {% endthumbnail %}
 {% empty %}
-<h3>Coming Soon</h3>
+
 </div>
 
 
 {% endfor %}
     </div>
+    {% else %}
+        <h3 id="cen"> coming soon</h3>
+    {% endif %}
 {% endblock %}
