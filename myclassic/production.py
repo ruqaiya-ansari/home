@@ -7,21 +7,24 @@ from .settings import BASE_DIR
 
 # Configure the domain name using the environment variable
 # that Azure automatically creates for us.
-hostname = os.environ.get('HTTP_HOST', '')
+
 
 # Check if the hostname matches the default domain or custom domain
-if 'classicreaders.azurewebsites.net' in hostname or 'www.classicreaders.azurewebsites.net' in hostname:
+hostname = os.environ.get('HTTP_HOST', '')
+
+# Add your custom domain(s) to the list of allowed hosts
+ALLOWED_HOSTS = ['www.mysterycastel.com', 'mysterycastel.com']
+
+# Add your custom domain(s) to the list of CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = ['https://www.mysterycastel.com', 'https://mysterycastel.com']
+
+# Check if the hostname matches the default domain
+if hostname and (hostname == 'classicreaders.azurewebsites.net' or hostname == 'www.classicreaders.azurewebsites.net'):
     # Add your default domain(s) to the list of allowed hosts
-    ALLOWED_HOSTS = ['classicreaders.azurewebsites.net', 'www.classicreaders.azurewebsites.net']
+    ALLOWED_HOSTS += ['classicreaders.azurewebsites.net', 'www.classicreaders.azurewebsites.net']
 
     # Add your default domain(s) to the list of CSRF trusted origins
-    CSRF_TRUSTED_ORIGINS = ['https://classicreaders.azurewebsites.net', 'https://www.classicreaders.azurewebsites.net']
-else:
-    # Add your custom domain(s) to the list of allowed hosts
-    ALLOWED_HOSTS = ['www.mysterycastel.com', 'mysterycastel.com']
-
-    # Add your custom domain(s) to the list of CSRF trusted origins
-    CSRF_TRUSTED_ORIGINS = ['https://www.mysterycastel.com', 'https://mysterycastel.com']
+    CSRF_TRUSTED_ORIGINS += ['https://classicreaders.azurewebsites.net', 'https://www.classicreaders.azurewebsites.net']
 DEBUG = False
 
 # WhiteNoise configuration
