@@ -7,8 +7,21 @@ from .settings import BASE_DIR
 
 # Configure the domain name using the environment variable
 # that Azure automatically creates for us.
-ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
-CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
+hostname = os.environ.get('HTTP_HOST', '')
+
+# Check if the hostname matches the default domain or custom domain
+if 'classicreaders.azurewebsites.net' in hostname or 'www.classicreaders.azurewebsites.net' in hostname:
+    # Add your default domain(s) to the list of allowed hosts
+    ALLOWED_HOSTS = ['classicreaders.azurewebsites.net', 'www.classicreaders.azurewebsites.net']
+
+    # Add your default domain(s) to the list of CSRF trusted origins
+    CSRF_TRUSTED_ORIGINS = ['https://classicreaders.azurewebsites.net', 'https://www.classicreaders.azurewebsites.net']
+else:
+    # Add your custom domain(s) to the list of allowed hosts
+    ALLOWED_HOSTS = ['www.mysterycastel.com', 'mysterycastel.com']
+
+    # Add your custom domain(s) to the list of CSRF trusted origins
+    CSRF_TRUSTED_ORIGINS = ['https://www.mysterycastel.com', 'https://mysterycastel.com']
 DEBUG = False
 
 # WhiteNoise configuration
