@@ -50,7 +50,7 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = 'pillow'
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_BASEPATH = f"https://{AZURE_CUSTOM_DOMAIN}/static/ckeditor/ckeditor/"
 
 
 
