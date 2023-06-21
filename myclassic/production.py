@@ -10,21 +10,9 @@ from .settings import BASE_DIR
 
 
 # Check if the hostname matches the default domain or custom domain
-hostname = os.environ.get('HTTP_HOST', '')
+ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else ['mysterycastel.com', 'www.mysterycastel.com']
 
-# Add your custom domain(s) to the list of allowed hosts
-ALLOWED_HOSTS = ['www.mysterycastel.com', 'mysterycastel.com']
-
-# Add your custom domain(s) to the list of CSRF trusted origins
-CSRF_TRUSTED_ORIGINS = ['https://www.mysterycastel.com', 'https://mysterycastel.com']
-
-# Check if the hostname matches the default domain
-if hostname and (hostname == 'classicreaders.azurewebsites.net' or hostname == 'www.classicreaders.azurewebsites.net'):
-    # Add your default domain(s) to the list of allowed hosts
-    ALLOWED_HOSTS += ['classicreaders.azurewebsites.net', 'www.classicreaders.azurewebsites.net']
-
-    # Add your default domain(s) to the list of CSRF trusted origins
-    CSRF_TRUSTED_ORIGINS += ['https://classicreaders.azurewebsites.net', 'https://www.classicreaders.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else ['https://mysterycastel.com', 'https://www.mysterycastel.com']
 DEBUG = False
 
 # WhiteNoise configuration
