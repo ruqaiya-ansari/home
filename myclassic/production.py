@@ -6,16 +6,21 @@ from .settings import BASE_DIR
  
 
 
-custom_domain = 'mysterycastel.com'
-www_custom_domain = 'www.mysterycastel.com'
+hostname = os.environ.get('HTTP_HOST', '')
 
-# Define the allowed hosts
+# Add your custom domain(s) to the list of allowed hosts
+ALLOWED_HOSTS = ['www.mysterycastel.com', 'mysterycastel.com']
 
-ALLOWED_HOSTS = [custom_domain, www_custom_domain]
+# Add your custom domain(s) to the list of CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = ['https://www.mysterycastel.com', 'https://mysterycastel.com']
 
-# Define the CSRF trusted origins
+# Check if the hostname matches the default domain
+if hostname and (hostname == 'classicreaders.azurewebsites.net' or hostname == 'www.classicreaders.azurewebsites.net'):
+    # Add your default domain(s) to the list of allowed hosts
+    ALLOWED_HOSTS += ['classicreaders.azurewebsites.net', 'www.classicreaders.azurewebsites.net']
 
-CSRF_TRUSTED_ORIGINS = ['https://' + custom_domain, 'https://' + www_custom_domain]]
+    # Add your default domain(s) to the list of CSRF trusted origins
+    CSRF_TRUSTED_ORIGINS += ['https://classicreaders.azurewebsites.net', 'https://www.classicreaders.azurewebsites.net']
 DEBUG = False
 
 # WhiteNoise configuration
