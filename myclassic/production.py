@@ -5,14 +5,17 @@ from .settings import *  # noqa
 from .settings import BASE_DIR
  
 
-# Configure the domain name using the environment variable
-# that Azure automatically creates for us.
+default_domain = os.environ.get('WEBSITE_HOSTNAME')
+custom_domain = 'mysterycastel.com'
+www_custom_domain = 'www.mysterycastel.com'
 
+# Define the allowed hosts
+ALLOWED_HOSTS = [default_domain] if default_domain else []
+ALLOWED_HOSTS += [custom_domain, www_custom_domain]
 
-# Check if the hostname matches the default domain or custom domain
-ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else ['mysterycastel.com', 'www.mysterycastel.com']
-
-CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else ['https://mysterycastel.com', 'https://www.mysterycastel.com']
+# Define the CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = ['https://' + default_domain] if default_domain else []
+CSRF_TRUSTED_ORIGINS += ['https://' + custom_domain, 'https://' + www_custom_domain]]
 DEBUG = False
 
 # WhiteNoise configuration
