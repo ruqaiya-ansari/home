@@ -5,17 +5,17 @@ from .settings import *  # noqa
 from .settings import BASE_DIR
  
 
-default_domain = os.environ.get('WEBSITE_HOSTNAME')
+
 custom_domain = 'mysterycastel.com'
 www_custom_domain = 'www.mysterycastel.com'
 
 # Define the allowed hosts
-ALLOWED_HOSTS = [default_domain] if default_domain else []
-ALLOWED_HOSTS += [custom_domain, www_custom_domain]
+
+ALLOWED_HOSTS = [custom_domain, www_custom_domain]
 
 # Define the CSRF trusted origins
-CSRF_TRUSTED_ORIGINS = ['https://' + default_domain] if default_domain else []
-CSRF_TRUSTED_ORIGINS += ['https://' + custom_domain, 'https://' + www_custom_domain]]
+
+CSRF_TRUSTED_ORIGINS = ['https://' + custom_domain, 'https://' + www_custom_domain]]
 DEBUG = False
 
 # WhiteNoise configuration
