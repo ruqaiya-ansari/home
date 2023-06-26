@@ -13,7 +13,7 @@ urlpatterns = [
     path('<pk>/chapter/', views.ChapterUpdateView.as_view(), name='edit_chapters'),
     path('chapter/<int:chapter_id>/content/create/', views.ContentCreateUpdateView.as_view(),
          name='chapter_content_create'),
-    path('chapter/<int:chapter_id>/content/<model_name>/<id>/', views.ContentCreateUpdateView.as_view(),
+    path('chapter/<int:chapter_id>/content/<id>/', views.ContentCreateUpdateView.as_view(),
          name='chapter_content_update'),
     path('content/<int:id>/delete/', views.ContentDeleteView.as_view(), name='chapter_content_delete'),
     path('chapter/order/', views.ChapterOrderView.as_view(), name='chapter_order'),

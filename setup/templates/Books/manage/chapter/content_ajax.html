@@ -14,7 +14,7 @@
                 <input type="submit" value="Delete">
                 {% csrf_token %}
             </form>
-                 <a href="{% url 'setup:chapter_content_update' chapter.id chapter.book.page_type page.id %}">Edit</a>
+                 <a href="{% url 'setup:chapter_content_update' chapter.id  page.id %}">Edit</a>
 
                 </div>
             {% endif %}

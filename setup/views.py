@@ -88,12 +88,12 @@ class ContentCreateUpdateView(SuperuserRequiredMixin, TemplateResponseMixin, Vie
             self.obj = get_object_or_404(self.model, id=id)
         return super(ContentCreateUpdateView, self).dispatch(request, chapter_id, id)
 
-    def get(self, request, chapter_id, model_name, id=None):
+    def get(self, request, chapter_id, id=None):
         form = self.get_form(self.model, instance=self.obj)
 
         return self.render_to_response({'form': form, 'object': self.obj})
 
-    def post(self, request, chapter_id, model_name, id=None):
+    def post(self, request, chapter_id, id=None):
         form = self.get_form(self.model, instance=self.obj, data=request.POST, files=request.FILES)
 
         if form.is_valid():

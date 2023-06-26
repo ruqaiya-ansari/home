@@ -3,8 +3,8 @@
 @import url(https://fonts.googleapis.com/css?family=Karla);
 @import url(https://fonts.googleapis.com/css?family=Caveat);
 
-@import url(http://fonts.googleapis.com/css?family=Poiret+One);
-
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
+.
 
 :root{
 
@@ -16,25 +16,17 @@
 --swiper-navigation-color:  black;
 }
 
-#ident{
-margin-top: -15px;
- width: 70px;
-  height: 50px;
-}
 
-#logo-text{
-    width:90px;
-    height: 13px;
-    margin-top:-22px;
-}
 .content{
     margin-top: 20vh;
 
 }
 #cen{
-    text-align: center;
-}
+text-align:center;}
 
+.logo a img{
+
+height: 45px;}
 html{
 scroll-behaviour:smooth;
 
@@ -921,7 +913,7 @@ position:fixed;
 top:0;
 left:0;
 
-height: 85vh;
+height: 70vh;
 background-color:white;
 
 
@@ -952,7 +944,7 @@ font-family:"Quicksand";
 z-index: 5;
 position:fixed;
 padding-top:15px;
-
+background-color:black;
 padding-bottom:10px;
 }
 
@@ -1281,7 +1273,7 @@ position: relative;
 
     box-sizing: border-box;
 
-    height: 300px;
+    height: 350px;
 width: 100%;
 
 }
@@ -1343,14 +1335,11 @@ box-sizing:border-box;
 
 }
 #color-logo{
-    height: 100px;
-    width:100px;
+    height: 90px;
+
 
 }
-#greytext{
-    width: 100px;
-    margin-top: -10px;
-}
+
 #bottom{
 margin-top: 10vh;
 height: 28vh;
@@ -1462,8 +1451,10 @@ margin-top: 20px;
   padding: 15px;
  }
 
-
-
+.bu{
+background-color: var(button-color);}
+#side-menu{
+background-color: rgba(0,0,0,0.8);}
 
 .review form p select{
 margin: 5px;
@@ -1603,43 +1594,45 @@ display: block;
 
 #ham{
 display:block;
-margin-right:auto;
+
 
 }
-#myli{
-margin-right: auto;
-    padding: 0;
-    align-self: center;
-}
-#ident{
-    height: 50px;
-    width:80px;
-    margin-top: -5px;
-}
+
+
 #color-logo{
-    height: 70px;
-    width: 90px;
+    height: 65px;
+
 }
 .home, .browse,.user, .genre, .logout{
 display:none;}
 .color{
 display:none;}
-.search{
-
-align-self: center;
-    padding: 0;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Additional styles for the header container if needed */
 }
+
+.header .logo {
+
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Additional styles for the logo container if needed */
+}
+
+.header .logo img {
+ height: 50px; /* Additional styles for the logo image if needed */
+}
+
+
 .myitems{
 flex:0 1 120px;
 margin: 5px;
 }
-.flee .box{
-   max-height: 180px;
 
-}
-.flee .box img{
-    height: 180px;
-}
 
 .libelement{
 grid-template-columns: 156px 156px;
@@ -1649,7 +1642,7 @@ grid-template-columns: 156px 156px;
 display:none;
 }
 .myitems a img{
-    height: 180px;
+    height: 170px;
 
 }
 
@@ -1660,7 +1653,22 @@ display:none;
 #covering blockquote p{
     font-size: 1.5rem;
 }
+.flee {
+display: grid;
+   grid-template-rows: 1fr 1fr;
 
+box-sizing: border-box;
+align-content:center;
+justify-content:center;
+}
+.flee .box {
+
+height: 180px;
+width: 90vw;}
+.flee .box img {
+width:100%;
+height: 100%;
+object-fit:cover;}
 
 .module_form{
 justify-content:stretch;}
@@ -1705,13 +1713,6 @@ width: 90%;
     width: 100%;
 }
 
-#logo-text{
-    width: 90px;
-}
-#ident{
-    height: 35px;
-    width:  55px;
-}
 .homie{
 height: 45vh;
 overflow: scroll;}
