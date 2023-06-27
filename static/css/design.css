@@ -2,9 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 @import url(https://fonts.googleapis.com/css?family=Karla);
 @import url(https://fonts.googleapis.com/css?family=Caveat);
-
 @import url(https://fonts.googleapis.com/css?family=Poiret+One);
-.
 
 :root{
 
@@ -483,16 +481,19 @@ top:30vh;
 padding: 5px;
 text-align:center;
 height:40%;
-z-index: 5;
+z-index: 3;
 letter-spacing: 0.2rem;
 position:fixed;
 cursor:default;
-background-color:var(--button-color);
+background-color: var(--button-color);
 color:white;
- font-family:'Catamaran';
+
+ font-family:'Quicksand';
  border: 1px solid var(--button-color);
  text-transform:capitalize;
  }
+ .homie a img{
+ height: 120px;}
  .close{
   position: absolute;
   top: 0;
@@ -944,7 +945,7 @@ font-family:"Quicksand";
 z-index: 5;
 position:fixed;
 padding-top:15px;
-background-color:black;
+
 padding-bottom:10px;
 }
 
